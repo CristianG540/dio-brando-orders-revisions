@@ -18,4 +18,5 @@ Route::get('/welcome', function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/usuarios', 'OrdersController@index');
+Route::get('ordenes/{user}', 'OrdersController@index');
+Route::get('ordenes/delete/{id}', 'OrdersController@destroy');

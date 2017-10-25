@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Couchdb\Usuarios;
+use App\Repositories\Couchdb\Ordenes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class OrdersController extends Controller
 {
 
-    protected $usuarios;
+    protected $ordenes;
 
-    public function __construct(Usuarios $usuarios)
+    public function __construct(Ordenes $ordenes)
     {
         $this->middleware('auth');
-        $this->usuarios = $usuarios;
+        $this->ordenes = $ordenes;
     }
 
     /**
@@ -21,12 +22,12 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user)
     {
-        $usuarios = $this->usuarios->all();
-
-        dd($usuarios);
-
+        $this->ordenes->usuario = $user;
+        $ordenes = $this->ordenes->all();
+        //dd($this->ordenes->delete(1508445455316));
+        return view('orders', compact('ordenes'));
     }
 
     /**
@@ -92,6 +93,11 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /*$res = $this->ordenes->delete($id);
+
+        if(isset($res->ok) && $res->ok){
+
+        }*/
+        return back()->withErrors(['msg'=> "perro hpta {$id}"]);
     }
 }

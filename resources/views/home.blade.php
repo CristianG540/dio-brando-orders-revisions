@@ -18,7 +18,7 @@
 
                     <div class="list-group">
                         @foreach ($usuarios as $user)
-                            <a href="#" class="list-group-item list-group-item-action">
+                            <a href="/ordenes/{{ $user }}" class="list-group-item list-group-item-action">
                                 {{ $user }}
                             </a>
                         @endforeach

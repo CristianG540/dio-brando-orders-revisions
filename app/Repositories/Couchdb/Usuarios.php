@@ -8,7 +8,16 @@ class Usuarios extends GuzzleHttpRequest
 {
 
     public function all() {
-        return $this->get("_all_dbs");
+        $allDbs = $this->get("_all_dbs");
+
+        $usuarios = array_map(function($db){
+            $db = explode("$", $db);
+            if( $db[0] == "supertest" ){
+                return $db[1];
+            }
+        }, $allDbs);
+
+        return array_filter($usuarios);
     }
 
 }

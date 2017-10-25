@@ -24,9 +24,20 @@ class GuzzleHttpRequest {
         ]);
     }
 
-    protected function get($url){
-        $res = $this->client->request('GET', $url);
+    protected function get($url, $params = []){
+        $res = $this->client->request('GET', $url, [
+            'query' => $params
+        ]);
 
         return json_decode( $res->getBody()->getContents() );
     }
+
+    protected function post($url, $data){
+        $res = $this->client->request('POST', $url, [
+            'json' => $data
+        ]);
+
+        return json_decode( $res->getBody()->getContents() );
+    }
+
 }
