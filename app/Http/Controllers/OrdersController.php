@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Couchdb\Usuarios;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
+
+    protected $usuarios;
+
+    public function __construct(Usuarios $usuarios)
+    {
+        $this->middleware('auth');
+        $this->usuarios = $usuarios;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,10 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = $this->usuarios->all();
+
+        dd($usuarios);
+
     }
 
     /**
