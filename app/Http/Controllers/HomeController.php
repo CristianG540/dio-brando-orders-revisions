@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Couchdb\Usuarios;
+use App\Repositories\Couchdb\Ordenes;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     protected $usuarios;
+    protected $ordenes;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Usuarios $usuarios)
+    public function __construct(Usuarios $usuarios, Ordenes $ordenes)
     {
         $this->middleware('auth');
         $this->usuarios = $usuarios;
+        $this->ordenes = $ordenes;
     }
 
     /**
@@ -27,6 +30,26 @@ class HomeController extends Controller
     public function index()
     {
         $usuarios = $this->usuarios->all();
+
+        $usuarios = array_map(function($user){
+
+            $this->ordenes->usuario = $user;
+            $orders = $this->ordenes->all();
+
+            $orders = array_filter($orders->rows, function($order){
+                return isset($order->doc->error);
+            });
+
+            return [
+                "nombre" => $user,
+                "errores" => count($orders)
+            ];
+
+
+        }, $usuarios);
+
+        //dd($usuarios);
+
         return view('home', compact('usuarios'));
     }
 }
