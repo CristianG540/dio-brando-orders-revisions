@@ -57,9 +57,11 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user, $id)
     {
-        //
+        $this->ordenes->usuario = $user;
+        $orden = $this->ordenes->find($id);
+        return view('show-order', compact('orden', 'user'));
     }
 
     /**
@@ -97,7 +99,7 @@ class OrdersController extends Controller
         $res = $this->ordenes->delete($id);
 
         if(isset($res->ok) && $res->ok){
-            return back();
+            return redirect("/ordenes/{$user}");
         }else{
             return back()->withErrors(['msg'=> json_encode($res)]);
         }

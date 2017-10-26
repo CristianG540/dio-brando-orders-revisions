@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('ordenes/{user}', 'OrdersController@index');
 Route::get('ordenes/{user}/delete/{id}', 'OrdersController@destroy');
+Route::get('ordenes/{user}/show/{id}', 'OrdersController@show');
