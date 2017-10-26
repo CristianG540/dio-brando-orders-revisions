@@ -9,30 +9,27 @@ class Ordenes extends GuzzleHttpRequest
 
     protected $usuario;
     protected $ordenes;
+    protected $orden;
 
     public function all() {
-        $this->ordenes = $this->get("supertest$".$this->usuario."/_all_docs", [
-            'include_docs' => 'true'
+        $this->ordenes = $this->get("supertest%24{$this->usuario}/_all_docs", [
+            'include_docs' => 'true',
+            'descending'   => 'true'
         ]);
         return $this->ordenes;
     }
 
+    public function find($id) {
+        $this->orden = $this->get("supertest%24{$this->usuario}/{$id}");
+        return $this->orden;
+    }
+
     public function delete($id) {
-        /*$ordenes = array_map(function($orden){
-            return $orden['_deleted'] = true;
-        }, $ordenes);*/
+        $this->find($id);
+        $this->orden->_deleted = true;
 
-        /**
-         * Le pongo ordenes por que aun que este buscando por un id especifico
-         * array_filter me devuelve un array asi sea con un solo resultado
-         */
-        $orden = array_filter($this->ordenes->rows, function($orden) use ($id){
-            return $orden->id == $id;
-        })[0]->doc;
-        $orden->_deleted = true;
-
-        $res = $this->post("supertest$".$this->usuario."/_bulk_docs", [
-            "docs" => [$orden]
+        $res = $this->post("supertest%24{$this->usuario}/_bulk_docs", [
+            "docs" => [$this->orden]
         ]);
         return $res[0];
     }
