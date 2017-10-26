@@ -10,13 +10,22 @@
                 <div class="panel-body" >
                     <div class="list-group">
                         @foreach ($ordenes->rows as $orden)
-                            <a href="/ordenes/delete/1" class="list-group-item list-group-item-action">
-                               {{ $orden->id }} | {{ count($orden->doc->items) }} | {{ date( "d-m-Y h:i a", intval($orden->id/1000) ) }}
-                            </a>
+                            <li class="list-group-item clearfix">
+                                <a href="#">
+                                    {{ $orden->id }} | {{ count($orden->doc->items) }} | {{ date( "d-m-Y h:i a", intval($orden->id/1000) ) }}
+                                </a>
+                                <span class="pull-right">
+                                    <button class="btn btn-xs btn-danger" onclick="window.location='/ordenes/{{ $user }}/delete/{{ $orden->id }}';">eliminar</button>
+                                </span>
+                            </li>
                         @endforeach
                     </div>
                     @if($errors->any())
-                        <h4>{{$errors->first()}}</h4>
+                        <div class="row" >
+                            <div class="col-md-12" style="color: red;">
+                                <h4 class="text-center">{{$errors->first()}}</h4>
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
