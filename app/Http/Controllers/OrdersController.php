@@ -27,7 +27,7 @@ class OrdersController extends Controller
         $this->ordenes->usuario = $user;
         $ordenes = $this->ordenes->all();
         //dd($this->ordenes->delete(1508445455316));
-        return view('orders', compact('ordenes'));
+        return view('orders', compact('ordenes', 'user'));
     }
 
     /**
@@ -91,15 +91,15 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($user, $id)
     {
-        /*$res = $this->ordenes->delete($id);
+        $this->ordenes->usuario = $user;
+        $res = $this->ordenes->delete($id);
 
         if(isset($res->ok) && $res->ok){
-
-        }*/
-
-        //
-        return back()->withErrors(['msg'=> "perro hpta {$id}"]);
+            return back();
+        }else{
+            return back()->withErrors(['msg'=> json_encode($res)]);
+        }
     }
 }
