@@ -20,7 +20,7 @@
                             <b>Codigo SAP:</b> {{ isset($orden->docEntry) ? $orden->docEntry : "" }}
                         </div>
                         <div class="col-md-4">
-                            <b>Cliente: </b> {{ $orden->nitCliente }}
+                            <b>Cliente: </b> {{ $orden->nitCliente or 'No se ingreso' }}
                         </div>
                     </div>
                     <div class="row text-center">
@@ -28,13 +28,13 @@
                             <b>Observaciones:</b> {{ $orden->observaciones }}
                         </div>
                     </div>
-                    @isset($orden->error)
-                    <div class="row text-center">
+                    @if( isset($orden->error) && $orden->error )
+                    <div class="row">
                         <div class="col-md-12" style="color: red;">
-                            <b>Error:</b> {{ $orden->error }}
+                            <b>Error:</b> <pre class="prettyprint">{{ json_encode(json_decode( $orden->error ), JSON_PRETTY_PRINT)  }} </pre>
                         </div>
                     </div>
-                    @endisset
+                    @endif
                     <br>
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">

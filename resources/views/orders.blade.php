@@ -14,11 +14,11 @@
                     <div class="list-group">
                         @foreach ($ordenes->rows as $orden)
                             <li class="list-group-item clearfix">
-                                <a href="/ordenes/{{ $user }}/show/{{ $orden->id }}" @isset( $orden->doc->error ) style="color: red;" @endisset>
+                                <a href="/ordenes/{{ $user }}/show/{{ $orden->id }}" @if( isset($orden->doc->error) && $orden->doc->error ) style="color: red;" @endif>
                                     {{ $orden->id }} | {{ count($orden->doc->items) }} | {{ date( "d-m-Y h:i a", intval($orden->id/1000) ) }}
-                                    @isset( $orden->doc->error )
+                                    @if( isset($orden->doc->error) && $orden->doc->error )
                                     <span class="badge badge-error">error</span>
-                                    @endisset
+                                    @endif
                                 </a>
 
                                 <span class="pull-right">
