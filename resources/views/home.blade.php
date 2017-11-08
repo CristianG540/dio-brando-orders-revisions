@@ -23,6 +23,7 @@
                                 @if ($user['errores'] > 0)
                                 <span class="badge badge-error">{{ $user['errores'] }}</span>
                                 @endif
+                                <span class="badge badge-info">{{ $user['cantOrdenes'] }}</span>
                             </a>
 
                         @endforeach

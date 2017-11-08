@@ -36,13 +36,14 @@ class HomeController extends Controller
             $this->ordenes->usuario = $user;
             $orders = $this->ordenes->all();
 
-            $orders = array_filter($orders->rows, function($order){
+            $ordersErr = array_filter($orders->rows, function($order){
                 return isset($order->doc->error) && $order->doc->error;
             });
 
             return [
-                "nombre" => $user,
-                "errores" => count($orders)
+                "nombre"      => $user,
+                "errores"     => count($ordersErr),
+                "cantOrdenes" => count($orders->rows)
             ];
 
 
