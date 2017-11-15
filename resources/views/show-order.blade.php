@@ -31,8 +31,10 @@
                     @if( isset($orden->newClient) )
                     <div class="row well text-center">
                         Nuevo cliente
-                        <div class="col-md-6"><b>Nombre: </b> {{ $orden->newClient->nombre or 'No se ingreso' }} </div>
-                        <div class="col-md-6"><b>NIT: </b> {{ $orden->newClient->codCliente or 'No se ingreso' }}</div>
+                        <div class="row">
+                            <div class="col-md-6"><b>Nombre: </b> {{ $orden->newClient->nombre or 'No se ingreso' }} </div>
+                            <div class="col-md-6"><b>NIT: </b> {{ $orden->newClient->codCliente or 'No se ingreso' }}</div>
+                        </div>
                     </div>
                     @endif
                     @if( isset($orden->error) && $orden->error )
