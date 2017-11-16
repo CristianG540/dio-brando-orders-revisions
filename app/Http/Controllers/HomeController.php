@@ -37,7 +37,7 @@ class HomeController extends Controller
             $orders = $this->ordenes->all();
 
             $ordersErr = array_filter($orders->rows, function($order){
-                return isset($order->doc->error) && $order->doc->error;
+                return (isset($order->doc->error) && $order->doc->error) || !isset($order->doc->docEntry) || $order->doc->docEntry == "" ;
             });
 
             return [
