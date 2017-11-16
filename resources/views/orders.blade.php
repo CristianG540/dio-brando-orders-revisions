@@ -16,7 +16,7 @@
                             <li class="list-group-item clearfix">
                                 <a href="/ordenes/{{ $user }}/show/{{ $orden->id }}" @if( (isset($orden->doc->error) && $orden->doc->error) || !isset($orden->doc->docEntry) || $orden->doc->docEntry == "" ) style="color: red;" @endif>
                                     {{ $orden->id }} | {{ count($orden->doc->items) }} | {{ date( "d-m-Y h:i a", intval($orden->id/1000) ) }}
-                                    @if( isset($orden->doc->error) && $orden->doc->error )
+                                    @if( (isset($orden->doc->error) && $orden->doc->error) || !isset($orden->doc->docEntry) || $orden->doc->docEntry == "" )
                                     <span class="badge badge-error">error</span>
                                     @endif
                                 </a>
