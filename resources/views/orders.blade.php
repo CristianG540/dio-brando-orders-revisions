@@ -15,7 +15,7 @@
                         @foreach ($ordenes->rows as $orden)
                             <li class="list-group-item clearfix">
                                 <a href="/ordenes/{{ $user }}/show/{{ $orden->id }}" @if( ( isset($orden->doc->error) && $orden->doc->error ) || !isset($order->doc->docEntry)  ) style="color: red;" @endif>
-                                    {{ $orden->id }} | {{ count($orden->doc->items) }} | {{ date( "d-m-Y h:i a", intval($orden->id/1000) ) }}
+                                    {{ $order->doc->docEntry }} | {{ $orden->id }} | {{ count($orden->doc->items) }} | {{ date( "d-m-Y h:i a", intval($orden->id/1000) ) }}
                                     @if( isset($orden->doc->error) && $orden->doc->error )
                                     <span class="badge badge-error">error</span>
                                     @endif
