@@ -51,7 +51,7 @@ class HomeController extends Controller
 
         //dd($usuarios);
 
-        $usuarios = collect($usuarios)->sortBy('errores')->reverse()->toArray();
+        $usuarios = collect($usuarios)->sortBy('cantOrdenes')->reverse()->toArray();
 
         return view('home', compact('usuarios'));
     }
