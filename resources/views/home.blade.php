@@ -20,9 +20,15 @@
                         @foreach ($usuarios as $user)
                             <a href="/ordenes/{{ $user['nombre'] }}" class="list-group-item list-group-item-action">
                                 {{ $user['nombre'] }}
+
                                 @if ($user['errores'] > 0)
                                 <span class="badge badge-error">{{ $user['errores'] }}</span>
                                 @endif
+
+                                @if ($user['pendingOrders'] > 0)
+                                <span class="badge badge-warning">{{ $user['pendingOrders'] }}</span>
+                                @endif
+
                                 <span class="badge badge-info">{{ $user['cantOrdenes'] }}</span>
                             </a>
 

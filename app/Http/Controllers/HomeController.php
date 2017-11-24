@@ -40,10 +40,21 @@ class HomeController extends Controller
                 return (isset($order->doc->error) && $order->doc->error) || !isset($order->doc->docEntry) || $order->doc->docEntry == "" ;
             });
 
+            $pendingOrders = array_filter($orders->rows, function($order){
+                if(!isset($order->doc->docEntry) || $order->doc->docEntry == ""){
+                    if( isset($order->doc->error) && $order->doc->error ){
+                        return false;
+                    }else {
+                        return true;
+                    }
+                }
+            });
+
             return [
-                "nombre"      => $user,
-                "errores"     => count($ordersErr),
-                "cantOrdenes" => count($orders->rows)
+                "nombre"        => $user,
+                "errores"       => count($ordersErr),
+                "cantOrdenes"   => count($orders->rows),
+                "pendingOrders" => count($pendingOrders)
             ];
 
 
