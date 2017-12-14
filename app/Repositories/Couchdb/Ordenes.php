@@ -34,6 +34,16 @@ class Ordenes extends GuzzleHttpRequest
         return $res[0];
     }
 
+    public function seen($id) {
+        $this->find($id);
+        $this->orden->estado = "seen";
+
+        $res = $this->post("supertest%24{$this->usuario}/_bulk_docs", [
+            "docs" => [$this->orden]
+        ]);
+        return $res[0];
+    }
+
     public function __get($property){
         if(property_exists($this, $property)) {
             return $this->$property;
