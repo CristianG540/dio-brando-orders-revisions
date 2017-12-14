@@ -104,4 +104,17 @@ class OrdersController extends Controller
             return back()->withErrors(['msg'=> json_encode($res)]);
         }
     }
+
+    public function seen($user, $id)
+    {
+        $this->ordenes->usuario = $user;
+        $res = $this->ordenes->seen($id);
+
+        if(isset($res->ok) && $res->ok){
+            return redirect("/ordenes/{$user}");
+        }else{
+            return back()->withErrors(['msg'=> json_encode($res)]);
+        }
+    }
+
 }

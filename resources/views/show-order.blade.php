@@ -66,6 +66,7 @@
                         </div>
                     </div>
                     <div class="row text-center">
+                        <a class="btn btn-info" href="/ordenes/{{ $user }}/seen/{{ $orden->_id }}" role="button">Marcar como revisado</a>
                         <a class="btn btn-danger" href="/ordenes/{{ $user }}/delete/{{ $orden->_id }}" role="button">Eliminar</a>
                     </div>
 
