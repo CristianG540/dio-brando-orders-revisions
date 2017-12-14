@@ -35,8 +35,10 @@ class Ordenes extends GuzzleHttpRequest
     }
 
     public function seen($id) {
+        date_default_timezone_set('America/Bogota');
         $this->find($id);
         $this->orden->estado = "seen";
+        $this->orden->updated_at = (string)round(microtime(true) * 1000);
 
         $res = $this->post("supertest%24{$this->usuario}/_bulk_docs", [
             "docs" => [$this->orden]
