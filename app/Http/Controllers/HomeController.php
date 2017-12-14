@@ -50,11 +50,16 @@ class HomeController extends Controller
                 }
             });
 
+            $seenOrders = array_filter($orders->rows, function($order){
+               return ((string)$order->doc->estado == "seen") ? true : false;
+            });
+
             return [
                 "nombre"        => $user,
                 "errores"       => count($ordersErr),
                 "cantOrdenes"   => count($orders->rows),
-                "pendingOrders" => count($pendingOrders)
+                "pendingOrders" => count($pendingOrders),
+                "seenOrders"    => count($seenOrders)
             ];
 
 

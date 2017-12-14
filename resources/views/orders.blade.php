@@ -19,6 +19,9 @@
                                     @if( (isset($orden->doc->error) && $orden->doc->error) || !isset($orden->doc->docEntry) || $orden->doc->docEntry == "" )
                                     <span class="badge badge-error">error</span>
                                     @endif
+                                    @if( isset($orden->doc->estado) && (string)$orden->doc->estado == "seen" )
+                                    <span class="badge badge-inverse">revisado</span>
+                                    @endif
                                 </a>
 
                                 <span class="pull-right">

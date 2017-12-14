@@ -29,6 +29,10 @@
                                 <span class="badge badge-warning">{{ $user['pendingOrders'] }}</span>
                                 @endif
 
+                                @if ($user['seenOrders'] > 0)
+                                <span class="badge badge-inverse">{{ $user['seenOrders'] }}</span>
+                                @endif
+
                                 <span class="badge badge-info">{{ $user['cantOrdenes'] }}</span>
                             </a>
 
