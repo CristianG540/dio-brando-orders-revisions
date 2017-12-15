@@ -54,9 +54,11 @@ class HomeController extends Controller
                return ((string)$order->doc->estado == "seen") ? true : false;
             });
 
+            $cantOrdenesErr = count($ordersErr) - count($seenOrders);
+
             return [
                 "nombre"        => $user,
-                "errores"       => count($ordersErr),
+                "errores"       => $cantOrdenesErr,
                 "cantOrdenes"   => count($orders->rows),
                 "pendingOrders" => count($pendingOrders),
                 "seenOrders"    => count($seenOrders)
