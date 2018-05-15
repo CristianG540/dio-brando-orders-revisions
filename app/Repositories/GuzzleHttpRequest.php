@@ -15,12 +15,12 @@ class GuzzleHttpRequest {
 
     public function __construct(Client $client) {
         $this->client = new Client([
-            'base_uri' => 'http://108.163.227.76:5984/',
+            'base_uri' => 'https://www.gatortyres.com:6984/',
             'headers' => [
                 'Accept'       => 'application/json',
                 'Content-Type' => 'application/json'
             ],
-            'auth' => ['admin', 'Webmaster2017#@']
+            'auth' => ['admin', 'admin']
         ]);
     }
 
